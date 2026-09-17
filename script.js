@@ -26,8 +26,8 @@
 
   var el = {};
   ['wrap', 'card', 'photoLayer', 'imgBg', 'imgMain', 'scrim', 'measuresBlock', 'measuresValue',
-   'wordmarkBlock', 'wordmark', 'logoImg', 'emptyState', 'reposOverlay', 'reposHint',
-   'btnPick', 'btnRepos', 'btnRemove', 'fitOptions', 'zoomRow', 'zoomSlider', 'btnCenter',
+   'wordmarkBlock', 'wordmark', 'logoImg', 'emptyState', 'reposOverlay', 'reposHint', 'reposBackdrop',
+   'btnPick', 'btnRepos', 'btnRemove', 'fitOptions', 'zoomRow', 'zoomSlider', 'btnCenter', 'btnDone',
    'inputMedidas', 'logoOptions', 'wmField', 'wmOptions', 'btnDownload', 'fileInput'
   ].forEach(function (id) { el[id] = document.getElementById(id); });
 
@@ -59,10 +59,12 @@
 
     el.emptyState.hidden = hasImg;
     el.reposOverlay.hidden = !state.repos;
-    el.zoomRow.hidden = !state.repos;
+    el.zoomRow.hidden = !state.repos || !hasImg;
     el.zoomSlider.value = state.scale;
 
     el.photoLayer.classList.toggle('repos-active', state.repos);
+    document.body.classList.toggle('repos-mode', state.repos && hasImg);
+    fitCard();
 
     el.scrim.style.height = (state.fit === 'cover' ? 46 : 30) + '%';
 
@@ -236,7 +238,11 @@
     state.tx = 0; state.ty = 0; state.scale = 1; state.repos = false;
     render();
   });
-  el.btnRepos.addEventListener('click', function () { state.repos = !state.repos; render(); });
+  el.btnRepos.addEventListener('click', function () {
+    if (!state.url) return;
+    state.repos = !state.repos; render();
+  });
+  el.btnDone.addEventListener('click', function () { state.repos = false; render(); });
   el.btnCenter.addEventListener('click', function () { state.tx = 0; state.ty = 0; state.scale = 1; render(); });
   el.zoomSlider.addEventListener('input', function (e) { state.scale = parseFloat(e.target.value); render(); });
   el.inputMedidas.addEventListener('input', function (e) { state.medidas = e.target.value; render(); });

@@ -19,7 +19,7 @@ input[type=range] { accent-color: #E6007E; }
 }
 
 .topbar { width: 100%; max-width: 620px; display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
-.logo-word { font-family: 'Baloo Thambi 2', sans-serif; font-weight: 800; font-size: 22px; letter-spacing: .5px; color: #fff; }
+.logo-word { font-family: 'Times New Roman', Times, serif; font-weight: 800; font-size: 22px; letter-spacing: .5px; color: #fff; }
 .accent { color: #E6007E; }
 .topbar-sub { font-size: 11px; letter-spacing: 2.4px; text-transform: uppercase; color: #8C8C96; }
 
@@ -61,6 +61,7 @@ input[type=range] { accent-color: #E6007E; }
 .contact-phone { font-weight: 700; font-size: 22px; color: #fff; letter-spacing: .4px; }
 .contact-handle { font-weight: 400; font-size: 19px; color: #B3B3BD; margin-top: 5px; }
 
+.empty-state[hidden] { display: none; }
 .empty-state {
   position: absolute; left: 64px; right: 64px; top: 64px; bottom: 330px;
   border: 2px dashed rgba(230,0,126,.55); border-radius: 12px;
@@ -102,11 +103,45 @@ input[type=range] { accent-color: #E6007E; }
 #logoOptions .chip { flex: 0 1 auto; min-height: 44px; }
 .wm-chip { flex: 1 1 130px; min-height: 44px; font-weight: 700; font-size: 17px; }
 
-.zoom-row { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border: 1px solid rgba(230,0,126,.35); border-radius: 8px; background: rgba(230,0,126,.06); }
+.zoom-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; row-gap: 10px; padding: 14px 16px; border: 1px solid rgba(230,0,126,.35); border-radius: 8px; background: rgba(230,0,126,.06); }
 .zoom-label { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #8C8C96; white-space: nowrap; }
-.zoom-slider { flex: 1; height: 44px; }
+.zoom-slider { flex: 1 1 160px; min-width: 0; height: 44px; }
 .zoom-reset { min-height: 44px; padding: 0 14px; border-radius: 6px; border: 1px solid rgba(255,255,255,.2); background: transparent; color: #B3B3BD; font-family: 'Open Sans', sans-serif; font-size: 13px; cursor: pointer; touch-action: manipulation; }
 .zoom-reset:hover { color: #fff; }
+
+.btn-done { flex: 1 1 auto; min-height: 44px; padding: 0 18px; border-radius: 6px; border: none; background: #E6007E; color: #fff; font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 13px; cursor: pointer; touch-action: manipulation; }
+.btn-done:hover { background: #FF2D87; }
+
+/* ---- reposition focus mode: image takes over the screen ---- */
+#reposBackdrop {
+  position: fixed; inset: 0; background: rgba(6,5,8,.92); z-index: 900;
+  opacity: 0; pointer-events: none; transition: opacity .2s ease;
+}
+body.repos-mode #reposBackdrop { opacity: 1; pointer-events: auto; }
+
+body.repos-mode .card-wrap {
+  position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 94vmin; max-width: 94vmin; height: 94vmin; z-index: 1000;
+  box-shadow: 0 30px 90px rgba(0,0,0,.85);
+}
+
+body.repos-mode .topbar,
+body.repos-mode .btn-row,
+body.repos-mode .field,
+body.repos-mode .download-btn {
+  opacity: 0; pointer-events: none;
+}
+.topbar, .btn-row, .field, .download-btn { transition: opacity .15s ease; }
+
+body.repos-mode #zoomRow {
+  position: fixed; left: 50%; bottom: max(24px, env(safe-area-inset-bottom) + 16px);
+  transform: translateX(-50%); z-index: 1100; width: min(92vw, 560px); margin: 0;
+  flex-wrap: wrap; row-gap: 10px;
+}
+body.repos-mode #zoomRow .zoom-label { display: none; }
+body.repos-mode #zoomRow .zoom-slider { flex: 1 1 100%; order: 1; }
+body.repos-mode #zoomRow #btnCenter { flex: 1 1 0; order: 2; }
+body.repos-mode #zoomRow #btnDone { flex: 1 1 0; order: 3; }
 
 .text-input { min-height: 44px; padding: 0 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,.16); background: #131118; color: #fff; font-family: 'Open Sans', sans-serif; font-size: 15px; }
 
