@@ -81,7 +81,7 @@ input[type=range] { accent-color: #E6007E; }
 /* ---- controls ---- */
 .controls { width: 100%; max-width: 620px; display: flex; flex-direction: column; gap: 18px; }
 .btn-row { display: flex; flex-wrap: wrap; gap: 10px; }
-.btn { flex: 1 1 auto; min-height: 44px; padding: 0 20px; border-radius: 8px; border: none; font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 14px; cursor: pointer; color: #fff; }
+.btn { flex: 1 1 auto; min-height: 44px; padding: 0 20px; border-radius: 8px; border: none; font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 14px; cursor: pointer; color: #fff; touch-action: manipulation; }
 .btn-primary { background: #E6007E; }
 .btn-primary:hover { background: #FF2D87; }
 .btn-toggle { border: 1px solid rgba(255,255,255,.18); background: transparent; }
@@ -94,27 +94,29 @@ input[type=range] { accent-color: #E6007E; }
 .field-label { font-size: 11px; letter-spacing: 2.4px; text-transform: uppercase; color: #8C8C96; }
 .chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
 .chip {
-  flex: 1 1 150px; min-height: 40px; padding: 0 14px; border-radius: 8px;
+  flex: 1 1 150px; min-height: 44px; padding: 0 14px; border-radius: 8px;
   border: 1px solid rgba(255,255,255,.16); background: transparent; color: #8C8C96;
-  font-family: 'Open Sans', sans-serif; font-size: 13px; cursor: pointer;
+  font-family: 'Open Sans', sans-serif; font-size: 13px; cursor: pointer; touch-action: manipulation;
 }
 .chip.active { border-color: #E6007E; background: rgba(230,0,126,.14); color: #fff; }
-#logoOptions .chip { flex: 0 1 auto; min-height: 38px; }
+#logoOptions .chip { flex: 0 1 auto; min-height: 44px; }
 .wm-chip { flex: 1 1 130px; min-height: 44px; font-weight: 700; font-size: 17px; }
 
 .zoom-row { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border: 1px solid rgba(230,0,126,.35); border-radius: 8px; background: rgba(230,0,126,.06); }
 .zoom-label { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #8C8C96; white-space: nowrap; }
 .zoom-slider { flex: 1; height: 44px; }
-.zoom-reset { min-height: 36px; padding: 0 14px; border-radius: 6px; border: 1px solid rgba(255,255,255,.2); background: transparent; color: #B3B3BD; font-family: 'Open Sans', sans-serif; font-size: 13px; cursor: pointer; }
+.zoom-reset { min-height: 44px; padding: 0 14px; border-radius: 6px; border: 1px solid rgba(255,255,255,.2); background: transparent; color: #B3B3BD; font-family: 'Open Sans', sans-serif; font-size: 13px; cursor: pointer; touch-action: manipulation; }
 .zoom-reset:hover { color: #fff; }
 
 .text-input { min-height: 44px; padding: 0 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,.16); background: #131118; color: #fff; font-family: 'Open Sans', sans-serif; font-size: 15px; }
 
-.download-btn { min-height: 48px; border-radius: 8px; border: 1px solid #E6007E; background: transparent; color: #FF4DA6; font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: .4px; cursor: pointer; }
+.download-btn { min-height: 48px; border-radius: 8px; border: 1px solid #E6007E; background: transparent; color: #FF4DA6; font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: .4px; cursor: pointer; touch-action: manipulation; }
 .download-btn:hover { background: rgba(230,0,126,.12); color: #fff; }
 
 .visually-hidden { display: none; }
 
 @media (max-width: 420px) {
   .page { padding: 20px 12px 48px; }
+  .topbar { flex-direction: column; align-items: flex-start; gap: 4px; }
 }
+.page { padding-bottom: max(64px, env(safe-area-inset-bottom) + 24px); }
