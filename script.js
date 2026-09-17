@@ -4,7 +4,7 @@
   var WHITE_FILTER = 'brightness(0) invert(1)';
   var LOGOS = {
     wordmark: { label: 'Wordmark', src: null },
-    branco:   { label: 'Logo', src: 'assets/logo-acrylicart-branco.png' }
+    branco:   { label: 'Logo', src: 'logo-acrylicart-branco.png' }
   };
 
   var WM = {
